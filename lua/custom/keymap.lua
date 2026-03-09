@@ -93,6 +93,12 @@ vim.keymap.set('n', '<D-S-v>', '"+p', { desc = 'Paste from clipboard' })
 vim.keymap.set('i', '<D-S-v>', '<C-r>+', { desc = 'Paste from clipboard' })
 vim.keymap.set('v', '<D-S-v>', '"+p', { desc = 'Paste from clipboard' })
 
+-- CMD + arrow for line start/end
+vim.keymap.set({ 'n', 'v' }, '<D-Left>', '0', { desc = 'Go to beginning of line' })
+vim.keymap.set({ 'n', 'v' }, '<D-Right>', '$', { desc = 'Go to end of line' })
+vim.keymap.set('i', '<D-Left>', '<Home>', { desc = 'Go to beginning of line' })
+vim.keymap.set('i', '<D-Right>', '<End>', { desc = 'Go to end of line' })
+
 vim.keymap.set('n', '<C-e>', '<Nop>', { noremap = true })
 vim.keymap.set('n', '<C-y>', '<Nop>', { noremap = true })
 vim.keymap.set('i', '<C-e>', '<Nop>', { noremap = true })
