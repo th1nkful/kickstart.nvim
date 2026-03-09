@@ -14,6 +14,9 @@ end
 
 vim.g.have_nerd_font = true
 vim.opt.relativenumber = true
+
+-- Font for GUI clients (Neovide, etc.) — terminal font is set in the terminal emulator
+vim.o.guifont = 'JetBrainsMono Nerd Font:h13'
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
