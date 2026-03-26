@@ -619,6 +619,7 @@ require('lazy').setup({
       vim.list_extend(ensure_installed, {
         'lua-language-server', -- Lua Language server (mason package name)
         'stylua', -- Used to format Lua code
+        'pyright', -- Python language server
         -- You can add other tools here that you want Mason to install
       })
 

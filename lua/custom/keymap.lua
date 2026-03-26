@@ -69,12 +69,15 @@ vim.keymap.set('n', '<S-Up>', move_viewport_up, { desc = 'Move cursor up by view
 vim.keymap.set('v', '<S-Down>', move_viewport_down, { desc = 'Move cursor down by viewport height' })
 vim.keymap.set('v', '<S-Up>', move_viewport_up, { desc = 'Move cursor up by viewport height' })
 
-vim.keymap.set('n', '<A-Left>', '<C-o>', { desc = 'Jump to previous location' })
-vim.keymap.set('n', '<A-Right>', '<C-i>', { desc = 'Jump to next location' })
-vim.keymap.set('n', '<M-Left>', '<C-o>', { desc = 'Jump to previous location' })
-vim.keymap.set('n', '<M-Right>', '<C-i>', { desc = 'Jump to next location' })
-vim.keymap.set('n', '<Esc>b', '<C-o>', { desc = 'Jump to previous location' })
-vim.keymap.set('n', '<Esc>f', '<C-i>', { desc = 'Jump to next location' })
+-- Option+Arrow: word boundary jumping (like terminal/vscode)
+vim.keymap.set({ 'n', 'v' }, '<A-Left>', 'b', { desc = 'Jump word back' })
+vim.keymap.set({ 'n', 'v' }, '<A-Right>', 'w', { desc = 'Jump word forward' })
+vim.keymap.set({ 'n', 'v' }, '<M-Left>', 'b', { desc = 'Jump word back' })
+vim.keymap.set({ 'n', 'v' }, '<M-Right>', 'w', { desc = 'Jump word forward' })
+vim.keymap.set('i', '<A-Left>', '<C-Left>', { desc = 'Jump word back' })
+vim.keymap.set('i', '<A-Right>', '<C-Right>', { desc = 'Jump word forward' })
+vim.keymap.set('i', '<M-Left>', '<C-Left>', { desc = 'Jump word back' })
+vim.keymap.set('i', '<M-Right>', '<C-Right>', { desc = 'Jump word forward' })
 vim.keymap.set('n', 'U', '<cmd>redo<CR>', { desc = 'Redo' })
 vim.keymap.set('v', '<A-Down>', ":m '>+1<CR>gv=gv", { desc = 'Move line [D]own' })
 vim.keymap.set('v', '<A-Up>', ":m '<-2<CR>gv=gv", { desc = 'Move line [U]p' })
@@ -85,6 +88,7 @@ vim.keymap.set({ 'n', 'v' }, '<M-y>', '<C-y>', { desc = 'Accept current completi
 
 vim.keymap.set('n', '<leader>fd', '<cmd>CopyPathToDir<CR>', { desc = 'Copy Current [F]ile [D]irectory' })
 vim.keymap.set('n', '<leader>fp', '<cmd>CopyPathToFile<CR>', { desc = 'Copy Current [F]ile [P]ath' })
+vim.keymap.set('n', '<leader>fr', '<cmd>CopyRelativePath<CR>', { desc = 'Copy Current [F]ile [R]elative Path' })
 
 vim.keymap.set('n', '<leader>lr', '<cmd>LspRestart<CR>', { desc = '[L]anguage Server [R]estart' })
 
@@ -98,6 +102,20 @@ vim.keymap.set({ 'n', 'v' }, '<D-Left>', '0', { desc = 'Go to beginning of line'
 vim.keymap.set({ 'n', 'v' }, '<D-Right>', '$', { desc = 'Go to end of line' })
 vim.keymap.set('i', '<D-Left>', '<Home>', { desc = 'Go to beginning of line' })
 vim.keymap.set('i', '<D-Right>', '<End>', { desc = 'Go to end of line' })
+
+-- Mouse: disable right-click paste, middle-click closes buffer
+vim.keymap.set({ 'n', 'i', 'v' }, '<RightMouse>', '<Nop>')
+vim.keymap.set('n', '<MiddleMouse>', function()
+  -- If clicked on the bufferline/tabline, close that buffer
+  local mouse = vim.fn.getmousepos()
+  if mouse.screenrow == 1 then
+    -- Click was on the tabline — use bufferline's close
+    vim.cmd 'BufferLinePickClose'
+  else
+    vim.cmd 'Bdelete'
+  end
+end, { desc = 'Middle-click closes buffer' })
+vim.keymap.set({ 'i', 'v' }, '<MiddleMouse>', '<Nop>')
 
 vim.keymap.set('n', '<C-e>', '<Nop>', { noremap = true })
 vim.keymap.set('n', '<C-y>', '<Nop>', { noremap = true })
