@@ -107,6 +107,7 @@ return {
       { '<leader>ff', function() Snacks.picker.files() end, desc = 'Find Files' },
       { '<leader>fa', function() Snacks.picker.files { hidden = true, no_ignore = true } end, desc = '[F]ind [A]ll Files' },
       { '<leader>fg', function() Snacks.picker.grep() end, desc = '[F]ind [G]rep' },
+      { '<leader>fz', function() Snacks.picker.grep { hidden = true, no_ignore = true } end, desc = '[F]ind Gre[Z] (all files)' },
       { '<leader>sw', function() Snacks.picker.grep_word() end, desc = '[S]earch current [W]ord' },
       { '<leader>f/', function() Snacks.picker.grep_buffers() end, desc = '[F]ind [/] in Open Files' },
       { '<leader><leader>', function() Snacks.picker.buffers() end, desc = 'Find existing buffers' },
